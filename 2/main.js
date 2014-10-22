@@ -13,7 +13,7 @@ function CalendarDayView(option){
 //    var html = '<table><tr><td ><div ><div class="time-col"></div></div></td><td ><div class="container"><div class="slot-col"></div> </div></td></tr></table>';
     var html = '<div class="time-col"></div><div class="container"><div class="slot-col"></div></div> ';
     var defaultOption = {
-        height: 700,
+        height: 720,
         width: 600,
         timeColWidth: 80,
         base: 9
