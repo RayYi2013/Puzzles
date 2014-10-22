@@ -56,33 +56,71 @@ $(function(){
             return a.start > b.start;
         });
 
-        var overlap = [],//store multiple events overlapped.
-            i, j, event,
+        var overlap = {list:[],end:0},//store events group overlapped., each item in list is a group of event without overlapped.
+            i, j, l,event,group,needNewGroup;
             n = list.length;
+
+        function setOverlap(overlap){
+            var l = overlap.list.length;
+            $.each(overlap.list,function(i,group){
+                //set overlap and col of each event in each group
+                $.each(group,function(j,item){
+                    list[item].overlap = l;
+                    list[item].col = i;
+                })
+            });
+        }
 
         //calculate overlap value for each event
         for(i=0; i<n; i++){
+            l = overlap.list.length;
             event = list[i];  //single event
-            if(overlap.length > 0){
-                //check all events in the overlap array
-                //if end of event is less than start of current event, remove it from overlap array.,
-                for(j = 0; j<overlap.length; j++){
-                    if(event.start > list[overlap[j]].end){
-                        overlap.splice(j,1);
+            if(l > 0){
+                //if current is outside current overlap list, clear the overlap list.
+                if(overlap.end <= event.start){
+                    //set overlap and col of each event in each group
+                    setOverlap(overlap);
+                    //reset overlap with new group
+                    overlap.list = [];
+                    overlap.list.push([i]);
+                    overlap.end = event.end;
+                }
+                else{
+                    needNewGroup = true;
+                    //check overlap against each group
+                    for(j=0; j<l; j++){
+                        group = overlap.list[j];
+                        //find first grout without overlap, push to this group
+                        if(event.start > list[group[group.length-1]].end){
+                            group.push(i);
+                            needNewGroup = false;
+                            break;
+                        }
                     }
+
+                    //if can't find group without overlap, create new group
+                    if(needNewGroup){
+                        group = [i];
+                        overlap.list.push(group);
+                    }
+
+                    //reset end of overlap
+                    overlap.end = Math.max(overlap.end,event.end);
+
+                    //re-order group list by end of last event of each group
+                    overlap.list.sort(function(a,b){
+                        return a[a.length-1].end - b[b.length-1].end;
+                    })
                 }
             }
-            //push current event to overlap array
-            overlap.push(i);
-
-            //set overlap value of all event in the overlap array to overlap size
-            n = overlap.length;
-            for(j = 0; j<n; j++){
-                list[overlap[j]].overlap = n;
-                list[overlap[j]].left = j;
+            else{
+                //create new group, and set end of overlap
+                overlap.list.push([i]);
+                overlap.end = event.end;
             }
-
         }
+
+        setOverlap(overlap);
 
         return list;
     }
@@ -91,11 +129,11 @@ $(function(){
         var slot = $('<div class="slot"></div>'),
             start = 0,
             end = 12 * 60,
-            top = event.start * slotCol.height/(end-start),
-            bottom = event.end * slotCol.height/(end-start),
+            top = event.start * slotCol.height()/(end-start),
+            bottom = event.end * slotCol.height()/(end-start),
             height = bottom - top,
-            width = slotCol.width / event.overlap,
-            left = width * event.left;
+            width = slotCol.width() / event.overlap,
+            left = width * event.col;
 
 
         slot.appendTo(slotCol).css({top:top,left:left}).width(width).height(height).html('<p>Sample Item</p><p>Sample location</p>');
@@ -107,7 +145,7 @@ $(function(){
             n = list.length;
 
         for(i=0; i<n; i++){
-            buildEventBox((slotCol,list[i]));
+            buildEventBox(slotCol,list[i]);
         }
 
 
@@ -119,6 +157,9 @@ function buildCalendar() {
         timeCol = $('div.time-col', calendar),
         slotCol = $('div.slot-col', calendar);
 
+    calendar.height(option.height).width(option.width);
+    slotCol.height(option.height).width(option.width - option.timeColWidth);
+    timeCol.height(option.height).width(option.timeColWidth);
 
     var events = [
         {start: 30, end: 150},
@@ -129,9 +170,6 @@ function buildCalendar() {
     buildTimeCol(timeCol);
     layOutDay(slotCol,events);
 
-    calendar.height(option.height).width(option.width);
-    slotCol.height(option.height).width(option.width - option.timeColWidth);
-    timeCol.height(option.height).width(option.timeColWidth);
 
     return calendar;
 
