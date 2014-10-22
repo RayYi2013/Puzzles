@@ -1,22 +1,58 @@
 
 .calendar {
     padding: 0px 10px 0px 10px;
+    position: relative;
 }
 
 .time-col{
     text-align: right;
+    position: absolute;
 }
 
-.slot-col {
+.time-col span.slot{
+    position: absolute;
+    width: 100%;
+    text-align: right;
+}
+
+.container {
+    background-color: lightgray;
+    position: absolute;
+}
+
+.container > .slot-col  {
     background-color: lightgray;
     position: relative;
+    height: 100%;
+    width: 100%;
 }
+
 
 span.hour {
     font-weight: bold;
 }
 
+span.half-hour {
+    font-weight: lighter;
+    font-size: smaller;
+}
+span.am {
+    font-weight: lighter;
+    font-size: smaller;
+}
 div.slot {
     position: absolute;
     background-color: white;
+    margin-left: 5px;
+    margin-right: 5px;
 }
+
+
+div.slot .event-name{
+    font-weight: bold;
+}
+
+div.slot .event-location{
+    font-weight: normal;
+}
+
