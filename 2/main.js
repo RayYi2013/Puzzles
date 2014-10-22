@@ -84,7 +84,7 @@ CalendarDayView.prototype = {
             height = bottom - top,
             width = (slotCol.innerWidth()-10) / event.overlap,
             left = width * event.col,
-            html = '<div class="event-name">Sample Item<div class="event-location">'+ this.formatTime(event.start) + ' To '+ this.formatTime(event.end) + '</div></div>';
+            html = '<div class="event-item"><div class="event-name">Sample Item<div class="event-location">'+ this.formatTime(event.start) + ' To '+ this.formatTime(event.end) + '</div></div></div>';
 //            html = '<div class="event-name">Sample Item<div class="event-location">Sample location</div></div>';
 
 

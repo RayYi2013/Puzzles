@@ -42,11 +42,17 @@ span.am {
 }
 div.slot {
     position: absolute;
-    background-color: white;
+    background-color: blue;
     margin-left: 5px;
     margin-right: 5px;
 }
 
+
+div.slot .event-item{
+    background-color: white;
+    margin-left: 10px;
+    height: 100%;
+}
 
 div.slot .event-name{
     font-weight: bold;
