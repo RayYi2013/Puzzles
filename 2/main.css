@@ -9,4 +9,14 @@
 
 .slot-col {
     background-color: lightgray;
+    position: relative;
+}
+
+span.hour {
+    font-weight: bold;
+}
+
+div.slot {
+    position: absolute;
+    background-color: white;
 }
