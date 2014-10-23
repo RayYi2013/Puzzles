@@ -1,0 +1,74 @@
+<div class="panel panel-default">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+
+                </header>
+                <div class="panel-body">
+
+                    <div class=" table-dynamic table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="th" ng-class="{'sort-active': sort === 'id', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('id')">
+                                        ID
+                                        <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                        Name
+                                        <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th" ng-class="{'sort-active': sort === 'email', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('email')">
+                                        E-mail
+                                        <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th" ng-class="{'sort-active': sort === 'role', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('role')">
+                                        Roles
+                                        <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="th">
+                                        Action
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr dir-paginate="user in users | itemsPerPage: size" total-items="totalUsers">
+                                <td ng-bind="user._id" ></td>
+                                <td ng-bind="user.name" ></td>
+                                <td>
+                                    <a href="mailto:{{user.email}}" >{{user.email}}</a>
+                                </td>
+                                <td ng-bind="user.role" ></td>
+                                <td class="text-center">
+                                    <a class="btn-icon btn-icon-sm bg-info" ng-href="/user/detail/{{user._id}}" ><i class="fa fa-pencil"></i></a>
+                                    <a class="btn-icon btn-icon-sm bg-danger" ng-hide="me._id==user._id" ng-click="delete(user._id)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" template-url="app/user/userlist/dirPagination.tpl.html"></dir-pagination-controls>
+
+                    <footer class="table-footer">
+                        <p class="text-right">
+                            <button class="btn btn-success" ng-click="addNew()" type="button"> New user</button>
+                        </p>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

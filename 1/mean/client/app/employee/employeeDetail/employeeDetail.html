@@ -1,0 +1,53 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <strong><span class="fa fa-th"></span> User</strong>
+    </div>
+    <div class="panel-body">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/user/list">Users</a>
+            </li>
+            <li class="active">
+                <a >{{user.name}}</a>
+            </li>
+        </ol>
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-required" name="form" ng-submit="save()" novalidate="">
+            <div class="row" ng-show="errors">
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" ng-show="errors.email.message">{{errors.email.message}}</div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="email">Email</label>
+                        <div class="col-sm-8"  ng-class="{'has-error': form.$dirty && form.email.$invalid}">
+                            <input ng-readonly="IsMe" class="form-control input-sm ng-pristine ng-valid ng-valid-required" id="email" name="email" ng-model="user.email" placeholder="Email" required="" type="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Name</label>
+                        <div class="col-sm-8" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                            <input class="form-control input-sm ng-pristine ng-valid ng-valid-required" id="name" name="name" ng-model="user.name" placeholder="Name" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group " >
+                        <label class="col-sm-2 control-label" for="role">Role</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox ">
+                                <label>
+                                    <input name="role" type="checkbox" ng-model="role"> Is Administrator
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center">
+                <button class="btn" ng-click="dismiss()" type="button">Dismiss</button>
+                <button class="btn btn-success" ng-disabled="form.$invalid" type="submit">Submit</button>
+            </p>
+
+        </form>
+    </div>
+</section>
