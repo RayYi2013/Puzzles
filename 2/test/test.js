@@ -2,6 +2,66 @@
  * Created by RYi on 10/21/2014.
  */
 
+QUnit.test( "event manager validate method return 4 valid events.", function( assert ) {
+    var events = [
+        {start: 30, end: 150},
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 670}
+    ];
+    var manager = new DayEventsManager();
+    var list = manager.validate(events);
+
+    var res = [
+        {start: 30, end: 150},
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 670}
+    ];
+
+    assert.deepEqual( res, list, "event list is validated correctly." );
+});
+
+
+QUnit.test( "event manager validate method return 3 valid events.", function( assert ) {
+    var events = [
+        {end: 150},
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 670}
+    ];
+    var manager = new DayEventsManager();
+    var list = manager.validate(events);
+
+    var res = [
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 670}
+    ];
+
+    assert.deepEqual( res, list, "event list is validated correctly." );
+});
+
+QUnit.test( "event manager validate method return 4 valid events within time frame.", function( assert ) {
+    var events = [
+        {start: -540, end: 600},
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 1000}
+    ];
+    var manager = new DayEventsManager();
+    var list = manager.validate(events);
+
+    var res = [
+        {start: 0, end: 600},
+        {start: 540, end: 600},
+        {start: 560, end: 620},
+        {start: 610, end: 720}
+    ];
+
+    assert.deepEqual( res, list, "event list is validated correctly." );
+});
+
 QUnit.test( "event manager test 4 events with 3 overlaped", function( assert ) {
     var events = [
         {start: 30, end: 150},

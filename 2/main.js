@@ -121,18 +121,64 @@ function DayEventsManager(events){
 DayEventsManager.prototype = {
     //init method, must called inside constructor.
     init: function(events){
-        //clone events array
-        var list = events.slice();
+        //validate events and clone it then sort it.
+        this.list = this.validate(events);
+        //init overlap set
+        //store events group overlapped, each item in list is a group of events without overlapped.
+        this.overlap = {list:[],end:0};
+    },
+    //validate events list and clone it then sort it. return new array.
+    validate: function(events){
+        //verify parameter
+        if(!$.isArray(events)){
+            return [];
+        }
+
+        var list = [],
+            event, start, end,
+            i, n = events.length;
+
+        //return new event after validation.
+        function validateEvent(event){
+            var newEvent,
+                limit = 12 * 60;
+
+            if($.isNumeric(event.start) && $.isNumeric(event.end)){
+                newEvent = {};
+                if(event.start > event.end){
+                    newEvent.start = event.end;
+                    newEvent.end = event.start;
+                }
+                else {
+                    newEvent.start = event.start;
+                    newEvent.end = event.end;
+                }
+
+                if(newEvent.start<0){
+                    newEvent.start = 0;
+                }
+
+                if(newEvent.end>limit){
+                    newEvent.end = limit;
+                }
+            }
+            return newEvent;
+        }
+
+        for(i=0; i<n; i++){
+            event = validateEvent(events[i]);
+            if(event){
+                list.push(event);
+            }
+        }
+
 
         //sort by start
         list = list.sort(function(a,b){
             return a.start > b.start;
         });
-        this.list = list;
 
-        //init overlap set
-        //store events group overlapped, each item in list is a group of events without overlapped.
-        this.overlap = {list:[],end:0};
+        return list;
     },
     //clear current overlap set, before do it, we need set overlap and col of each event in the set.
     clearOverlap: function(){
