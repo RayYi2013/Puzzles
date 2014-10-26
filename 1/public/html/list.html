@@ -1,0 +1,34 @@
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Employee List</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  ng-repeat="employee in list">
+            <td>{{employee.name}}</td>
+            <td>{{employee.department}}</td>
+            <td>{{employee.title}}</td>
+            <td>{{employee.startDate | date:'yyyy-MM-dd'}} </td>
+            <td>
+                <a class="btn" href="/edit/{{employee.id}}">Edit</a>
+                <a class="btn" ng-click="del(employee)">Delete</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<a class="btn" href="/new">Create New</a>

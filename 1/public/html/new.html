@@ -1,0 +1,49 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Add New Employee</strong>
+    </div>
+    <div class="panel-body">
+
+        <form class="form-horizontal " name="form" ng-submit="save()" novalidate="">
+            <div class="row" ng-show="errors">
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" ng-show="errors.email.message">{{errors.email.message}}</div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Name</label>
+                        <div class="col-sm-8" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                            <input class="form-control input-sm " id="name" name="name" ng-model="user.name" placeholder="Name" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="department">Department</label>
+                        <div class="col-sm-8" ng-class="{'has-error': form.$dirty && form.department.$invalid}">
+                            <input class="form-control input-sm " id="department" name="department" ng-model="user.department" placeholder="Department" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">Title</label>
+                        <div class="col-sm-8" ng-class="{'has-error': form.$dirty && form.title.$invalid}">
+                            <input class="form-control input-sm " id="title" name="title" ng-model="user.title" placeholder="Title" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Start Date</label>
+                        <div class="col-sm-8" ng-class="{'has-error': form.$dirty && form.startDate.$invalid}">
+                            <input class="form-control input-sm " id="startDate" name="startDate" ng-model="user.startDate"  required="" type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center">
+                <button class="btn" ng-click="dismiss()" type="button">Dismiss</button>
+                <button class="btn btn-success" ng-disabled="form.$invalid" type="submit">Submit</button>
+            </p>
+
+        </form>
+    </div>
+</section>
