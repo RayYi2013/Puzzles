@@ -1,0 +1,45 @@
+/**
+ * Created by ray on 2014-10-25.
+ */
+
+use employee
+
+db.dropDatabase()
+
+db.createCollection('employees')
+
+db.employees.insert({
+    name: 'John Terry',
+    department: 'Sales',
+    title: 'Manager',
+    startDate: ISODate("2012-10-13T07:00:00.000Z")
+})
+
+db.employees.insert({
+    name: 'Harry Pert',
+    department: 'Account',
+    title: 'Assistant',
+    startDate: ISODate("2010-06-13T07:00:00.000Z")
+})
+
+db.employees.insert({
+    name: 'Henry Tai',
+    department: 'Development',
+    title: 'Sr. Engineer',
+    startDate: ISODate("2013-10-01T07:00:00.000Z")
+})
+
+db.employees.insert({
+    name: 'George Woo',
+    department: 'Sales',
+    title: 'Assistant',
+    startDate: ISODate("2002-10-01T07:00:00.000Z")
+})
+
+db.employees.insert({
+    name: 'Jerry Thomas',
+    department: 'Sales',
+    title: 'Manager',
+    startDate: ISODate("2010-10-13T07:00:00.000Z")
+})
+

@@ -1,0 +1,19 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index(any="none")
+
+# api
+GET     /api/employees             controllers.Employees.list()
+POST    /api/employees             controllers.Employees.create()
+GET     /api/employees/:id          controllers.Employees.detail(id:String)
+PUT  	/api/employees/:id          controllers.Employees.update(id:String)
+DELETE  /api/employees/:id          controllers.Employees.delete(id:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Redirect all unknown routes to the index page
+GET      /*any                     controllers.Application.index(any)
