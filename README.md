@@ -14,11 +14,13 @@ assignments for linkedIn.
 ####requirement before setup puzzle #1:'
 * install play!framework
 * install mongodb
-* open mongo console, run scrip in the 'db/testdata.js' to create test data in collection 'employees' on db 'employee'. 
+ 
 
 ####steps to setup:
 * download all code
 * go to folder '1'
+* start mongodb,
+* prepare test data: open mongo console, run scrip in the 'db/testdata.js' to create test data in collection 'employees' on db 'employee'.
 * execute cmd 'activator' to start play!.
 * open browser to 'localhost:9000', the web app will show up.
 
