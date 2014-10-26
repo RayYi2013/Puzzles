@@ -4,7 +4,7 @@ assignments for linkedIn.
 
 ### What is this repository for? ###
 
-* requirement document: 'puzzles from linkedIn.docx'
+* requirement document: 'puzzles requirement.docx'
 * High level design documents: 'Puzzle 1 High Level Design.docx', 'Puzzle 2 High Level Design.docx'
 * Sub-folder 1, Puzzle One #1: simple web app to perform CRUD (create, read, update, delete) .
 * Sub-folder 2, Puzzle Materials #2:  Given a set of events, render the events on a single day calendar 
